@@ -2,23 +2,40 @@
 const commando = require('discord.js-commando');
 const config = require('./config.js');
 
-//const bot = new Discord.Client();
+/*
+const bot = new Discord.Client();
 
-//bot.on('message', (message) => {
-//    if(message.content == 'ping'){
-//
-//        //message.channel.sendMessage('pong');
-//        message.reply('pong');
-//    }
-//});
+bot.on('ready', function(evt){
+    console.log('Connected');
+    console.log('Logged in as: ');
+    console.log(bot.username+' - ('+bot.id+')');
+});
 
-const bot = new commando.Client();
+bot.on('message', (message) => {
+    if(message.content == 'ping'){
 
-console.log("first");
+        //message.channel.sendMessage('pong');
+        message.reply('pong');
+    }
+});
+*/
+
+
+
+const bot = new commando.Client({
+    commandPrefix: '!',  
+    owner: '205419967758336009',
+    disableEveryone: true,
+});
+
 bot.registry.registerGroup('random', 'Random');
-console.log("second");
 bot.registry.registerDefaults();
-console.log("third");
 bot.registry.registerCommandsIn(__dirname + "/commands");
 
+bot.on('ready', ()=>{
+    console.log("Logged in!");
+    bot.user.setGame("in some game...");
+});
+
 bot.login(config.token);
+
